@@ -1,0 +1,24 @@
+[package]
+name = "search_lambda"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+avro_utils = { path = "../avro_utils" }
+bytes = { workspace = true }
+base64 = { workspace = true }
+url = { workspace = true }
+apache-avro = { workspace = true, features = ["snappy", "zstandard", "bzip", "xz"] }
+lazy_static = { workspace = true }
+lambda_runtime = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["macros"] }
+async-recursion = { workspace = true }
+futures = { workspace = true }
+tracing = { workspace = true, features = ["log"] }
+tracing-subscriber = { workspace = true, default-features = false, features = ["fmt"] }
+
+aws-config = { workspace = true }
+aws-sdk-s3 = { workspace = true }
+cached = { workspace = true }

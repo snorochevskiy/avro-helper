@@ -1,0 +1,15 @@
+case class MyMsg(msgId: Long, msgName: String, nums: Array[Int])
+case class MyWrapper(version: String, uuid: String, msg: MyMsg)
+
+val df = Seq(
+  MyWrapper("1.0.0", "c71a8c04-b291-48f5-b7ae-7794465ee74d", MyMsg(1L, "Msg_1", Array(1,2,3))),
+  MyWrapper("1.0.0", "de642594-7b9b-4c07-aa66-1c584b3163ac", MyMsg(2L, "Msg_2", Array(3,4,5))),
+  MyWrapper("1.0.0", "6f5826ca-aeaa-41b1-b944-7def4cc92a07", MyMsg(3L, "Msg_3", Array(7,8,9))),
+).toDF
+
+df.coalesce(1).write.format("avro").option("compression", "snappy").save("test_data/avro/snappy/")
+
+df.coalesce(1).write.format("avro").option("compression", "deflate").save("test_data/avro/deflate/")
+
+df.coalesce(1).write.format("avro").option("compression", "uncompressed").save("test_data/avro/uncompressed/")
+
